@@ -302,11 +302,12 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            Transformers have revolutionized vision and natural language processing 
-            with their ability to scale with large datasets. But in robotic manipulation, 
-            data is both limited and expensive. Can we still benefit from Transformers with the right problem formulation? 
+            Transformers excel in vision and NLP but face challenges in robotic manipulation due to limited data. We introduce a language-conditioned behavior-cloning agent for 
+            6-DoF manipulation that uses a transformer to encode language goals and RGB-D voxel observations, outputting actions by detecting the optimal voxel. 
+            This voxel-based method efficiently learns 6-DoF policies and outperforms image-based and 3D ConvNet models. We train a single multi-task Transformer on 18 RLBench tasks and 
+            7 real-world tasks, achieving superior performance with minimal demonstrations. 
           </p>
-          <p>
+<!--           <p>
             We investigate this question with <span class="dperact">PerAct</span>, a
             language-conditioned behavior-cloning agent for multi-task 6-DoF manipulation.
             <span class="dperact">PerAct</span> encodes language goals and RGB-D voxel observations with a 
@@ -316,11 +317,11 @@
             policies. 
           </p>
           <p>
-            With this formulation, we train <b>a single multi-task Transformer</b> for 18
-            <a target="_blank" href="https://sites.google.com/view/rlbench">RLBench</a> (with 249 variations) and 7 real-world tasks (with 18 variations) from just a few demonstrations per task. Our
-            results show that <span class="dperact">PerAct</span> significantly outperforms unstructured image-to-action
-            agents (by 34x) and 3D ConvNet baselines (by 2.8x) for a wide range of tabletop tasks.
-          </p>
+            Transformers excel in vision and NLP but face challenges in robotic manipulation due to limited data. We introduce a language-conditioned behavior-cloning agent for 
+            6-DoF manipulation that uses a transformer to encode language goals and RGB-D voxel observations, outputting actions by detecting the optimal voxel. 
+            This voxel-based method efficiently learns 6-DoF policies and outperforms image-based and 3D ConvNet models. We train a single multi-task Transformer on 18 RLBench tasks and 
+            7 real-world tasks, achieving superior performance with minimal demonstrations.
+          </p> -->
         </div>
       </div>
     </div>
@@ -335,7 +336,7 @@
     <div class="column is-two-thirds">
       <h2 class="title is-3">Video</h2>
       <div class="publication-video">
-        <iframe src="https://www.youtube.com/embed/TB0g52N-3_Y?rel=0&amp;showinfo=0"
+        <iframe src="https://www.youtube.com/embed/ugzNRL0GYDI?si=EIbiGG2SW9sCcAgZ"
                 frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
       </div>
     </div>
@@ -350,17 +351,17 @@
 
 
     <!-- Animation. -->
-    <div class="rows is-centered ">
+<!--     <div class="rows is-centered ">
       <div class="row is-full-width">
         <h2 class="title is-3"><span class="dperact">PerAct</span></h2>
-
+ -->
         <!-- Interpolating. -->
         <h3 class="title is-4">A Transformer for Detecting Actions</h3>
         <div class="content has-text-justified">
         <!-- <br> -->
         </div>
         <p>
-          <span class="dperact">PerAct</span> is a language-conditioned behavior-cloning agent trained with supervised learning to <i>detect actions</i>. Instead of using object-detectors, instance-segmentors, or pose-estimators to represent a scene and then learning a policy, <span class="dperact">PerAct</span> directly learns <b>perceptual representations of actions</b> conditioned on language goals. This <a target="_blank" href="https://en.wikipedia.org/wiki/Ecological_psychology">action-centric approach</a> with a unified observation and action space makes <span class="dperact">PerAct</span> applicable to a broad range of tasks involving articulated objects, deformable objects, granular media, and even some non-prehensile interactions with tools.  
+          <span class="dperact">Manipulation</span> is a language-conditioned behavior-cloning agent trained with supervised learning to <i>detect actions</i>. Instead of using object-detectors, instance-segmentors, or pose-estimators to represent a scene and then learning a policy, <span class="dperact">Manipulation</span> directly learns <b>perceptual representations of actions</b> conditioned on language goals. This <a target="_blank" href="https://en.wikipedia.org/wiki/Ecological_psychology">action-centric approach</a> with a unified observation and action space makes <span class="dperact">Manipulation</span> applicable to a broad range of tasks involving articulated objects, deformable objects, granular media, and even some non-prehensile interactions with tools.  
         </p>
         </br>
         </br>
@@ -369,9 +370,9 @@
         </br>
         </br>
           <p>
-              <span class="dperact">PerAct</span> takes as input a language goal and a voxel grid reconstructed from RGB-D sensors. The voxels are split into 3D patches (like <a target="_blank" href="https://arxiv.org/abs/2010.11929">vision transformers</a> split images into 2D patches), and the language goal is encoded with a pre-trained language model. The language and voxel features are appended together as a sequence and encoded with a <a target=”_blank” href="https://www.deepmind.com/blog/building-architectures-that-can-handle-the-worlds-data">PerceiverIO Transformer</a> to learn per-voxel features. These features are then reshaped with linear layers to predict a discretized translation, rotation, gripper open, and collision avoidance action, which can be executed with a motion-planner. 
+              <span class="dperact">Manipulation</span> takes as input a language goal and a voxel grid reconstructed from RGB-D sensors. The voxels are split into 3D patches (like <a target="_blank" href="https://arxiv.org/abs/2010.11929">vision transformers</a> split images into 2D patches), and the language goal is encoded with a pre-trained language model. The language and voxel features are appended together as a sequence and encoded with a <a target=”_blank” href="https://www.deepmind.com/blog/building-architectures-that-can-handle-the-worlds-data">PerceiverIO Transformer</a> to learn per-voxel features. These features are then reshaped with linear layers to predict a discretized translation, rotation, gripper open, and collision avoidance action, which can be executed with a motion-planner. 
               <!-- This action is executed with a motion-planner after which the new observation is used to predict the next discrete action in an observe-act loop until termination.  -->
-              Overall, the voxelized observation and action space provides a strong structural prior for efficiently learning 6-DoF polices. Checkout our <a target="_blank" href="https://colab.research.google.com/drive/1HAqemP4cE81SQ6QO1-N85j5bF4C0qLs0?usp=sharing">Colab Tutorial</a> for an annotated guide on implemententing <span class="dperact">PerAct</span> and training it from scratch on a single GPU.
+              Overall, the voxelized observation and action space provides a strong structural prior for efficiently learning 6-DoF polices. Checkout our <a target="_blank" href="https://colab.research.google.com/drive/1mEzmr27bcvoJ-RAwKO-lZFXFLle-iLZ7?usp=sharing">Colab Tutorial</a> for an annotated guide on implemententing <span class="dperact">Manipulation</span> and training it from scratch on a single GPU.
           </p>
         </br>
         </br>
@@ -380,7 +381,7 @@
             <img src="media/figures/perceiver.png" class="interpolation-image" width="480" align="right"
                  style="margin:0% 4% "
                  alt="Interpolate start reference image." />
-             The input grid is 100&times;100&times;100 = 1 million voxels. After extracting 5&times;5&times;5 patches, the input is 20&times;20&times;20 = 8000 embeddings long. Despite this long sequence, Perceiver uses a small set of latent vectors to encode the input. These latent vectors are randomly initialized and trained end-to-end. This approach decouples the depth of the Transformer self-attention layers from the dimensionality of the input space, which allows us train <span class="dperact">PerAct</span> on very large input voxel grids. Perceiver has been deployed in several domains like <a target="_blank" href="https://www.deepmind.com/publications/perceiver-ar-general-purpose-long-context-autoregressive-generation">long-context auto-regressive generation</a>, <a target="_blank" href="https://arxiv.org/abs/2204.14198">vision-language models for few-shot learning</a>, <a target="_blank" href="https://arxiv.org/abs/2107.14795">image and audio classification, and optical flow prediction.</a>
+             The input grid is 100&times;100&times;100 = 1 million voxels. After extracting 5&times;5&times;5 patches, the input is 20&times;20&times;20 = 8000 embeddings long. Despite this long sequence, Perceiver uses a small set of latent vectors to encode the input. These latent vectors are randomly initialized and trained end-to-end. </a>
           </p>
         <br/>
         <br/>
@@ -491,7 +492,7 @@
       <h2 class="title is-3">Emergent Properties</h2>
 
       <h3 class="title is-4">Tracking Objects</h3>
-      A selected example of tracking an unseen hand sanitizer instance with an agent that was trained on a single object with 5 "press the handsan" demos. Since <span class="dperact">PerAct</span> focuses on actions, it doesn't need a complete representation of the bottle, and only has to predict <b><i>where</i> to press</b> the sanitizer.
+      A selected example of tracking an unseen hand sanitizer instance with an agent that was trained on a single object with 5 "press the handsan" demos. Since <span class="dperact">Manipulation</span> focuses on actions, it doesn't need a complete representation of the bottle, and only has to predict <b><i>where</i> to press</b> the sanitizer.
 
       <video id="tracking-objects"
              muted
@@ -509,7 +510,7 @@
 </section>
 
 
-<section class="section" id="BibTeX">
+<!-- <section class="section" id="BibTeX">
   <div class="container is-max-widescreen content">
     <h2 class="title">BibTeX</h2>
     <pre><code>@inproceedings{shridhar2022peract,
@@ -519,7 +520,7 @@
   year      = {2022},
 }</code></pre>
   </div>
-</section>
+</section> -->
 
 
 <footer class="footer">
